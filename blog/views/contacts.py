@@ -4,5 +4,4 @@ def contacts(request):
     return render(
         request, 
         'contacts.html',
-        { 'ownername': 'Ana Freitas' }
     )

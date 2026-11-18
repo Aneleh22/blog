@@ -1,6 +1,7 @@
 import random
 
 from django.core.management.base import BaseCommand
+#É a classe que permite criar comandos personalizados do Django
 from django.contrib.auth import get_user_model
 from datetime import datetime
 from django.utils import timezone
@@ -8,12 +9,14 @@ from blog.models import Post
 
 
 class Command(BaseCommand):
+#Nossa classe Command herda BaseCommand
 
     help = 'Cria postagens fictícias para testes'
 
     def handle(self, *args, **options):
+    #É o método executado quando chamamos nosso comando pelo terminal
 
-        # Verifica se já existem postagens
+        #Verifica se existe pelo menos um registro na tabela. Se existir, exibimos uma mensagem e encerramos a execução com return
         if Post.objects.exists():
             self.stdout.write(
                 self.style.WARNING(
@@ -22,9 +25,12 @@ class Command(BaseCommand):
             )
             return
 
-        # Recupera os usuários cadastrados
+       
         User = get_user_model()
+        # Recupera os usuários cadastrados
         users = list(User.objects.all())
+        #Recupera todos os usuários cadastrados
+        
 
         # Verifica se existem usuários
         if not users:
@@ -124,7 +130,11 @@ class Command(BaseCommand):
 
             randon_image = random.randint(1, 100)
             post = Post.objects.create(
+            #É o ORM do Django criando diretamente um registro na tabela, sem precisar escrever SQL
+                
                 user=random.choice(users),
+                #Escolhe um elemento aleatório da lista para ser "dono" da postagem
+               
                 title=data['title'],
                 created_at=self.random_date(),
                 summary=data['summary'],
