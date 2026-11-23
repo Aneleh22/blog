@@ -1,10 +1,13 @@
+#blog/urls.py
 from django.urls import path
+
 from . import views
 
-urlpatterns = [
-    # Rota para página inicial
-    path('', views.home, name='home'),
 
-    # Rota para a página de contatos
-    path('contacts/', views.contacts, name='contacts'),
+urlpatterns = [
+
+    path('', views.home, name='home'),                              # Página inicial
+    path('contacts/', views.contacts, name='contacts'),             # Página de contatos
+    path('post/<int:id>/', views.post_detail, name='post_detail'),  # Página do post completo
+
 ]

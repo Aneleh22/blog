@@ -1,3 +1,4 @@
+{# blog\templates\home.html #}
 {% extends '_base.html' %}
 
 {% block content %}
@@ -23,7 +24,7 @@
                     <p class="card-text flex-grow-1">{{ post.summary }}</p>
                 </div>
                 <div class="card-footer d-grid text-center">
-                    <a href="#{{ post.id }}">Ver post</a>
+                    <a href="{% url 'post_detail' id=post.id %}">Ver post</a> {# gera um link e adiciona o id do post #}
                 </div>
             </div>
 
