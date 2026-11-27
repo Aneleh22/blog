@@ -1,6 +1,7 @@
 {# blog\templates\_base.html #}
 <!DOCTYPE html>
 {% load static %}
+{% static 'img/anonimous.png' as default_image %}
 <html lang="pt-BR">
 
 <head>
@@ -13,7 +14,8 @@
     <title>Blog</title>
 </head>
 
-<body data-bs-theme="light" class="px-2 min-vh-100 d-flex flex-column">
+<body data-show-login="{% if request.GET.next %}true{% else %}false{% endif %}"
+    class="px-2 min-vh-100 d-flex flex-column">
 
     <nav class="container navbar navbar-expand-md navbar-dark text-bg-dark fixed-top mx-auto rounded-bottom">
         <div class="container-fluid">
@@ -42,13 +44,8 @@
                     {% if request.user.is_authenticated %}
 
                     <a href="{% url 'profile' %}" class="d-flex align-items-center">
-                        {% if request.user.image %}
-                        <img src="{{ request.user.image }}" alt="{{ request.user.name }}"
+                        <img src="{{ user.image|default:default_image }}" alt="{{ user.name|default:user.username }}"
                             class="rounded-circle d-block me-2" referrerpolicy="no-referrer">
-                        {% else %}
-                        <img src="{% static 'img/anonimous.png' %}" alt="{{ request.user.name }}"
-                            class="rounded-circle d-block me-2">
-                        {% endif %}
                         <span>Perfil</span>
                     </a>
 
@@ -140,8 +137,8 @@
             <a href="#top" class="fs-2"><i class="bi bi-arrow-up-square-fill"></i></a>
         </div>
     </footer>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="{% static 'js/script.js' %}"></script>
 
     {# Modal de authenticação #}
     <div class="modal fade" id="loginModal" tabindex="-1">
@@ -154,7 +151,7 @@
                 <div class="modal-body">
                     <form method="POST" action="{% url 'login' %}">
                         {% csrf_token %}
-                        <input type="hidden" name="next" value="{{ request.get_full_path }}">
+                        <input type="hidden" name="next" value="{{ request.GET.next|default:request.get_full_path }}">
                         <div class="mb-3">
                             <label class="form-label">Usuário</label>
                             <input type="text" name="username" class="form-control" placeholder="Seu usuário" required>
@@ -176,6 +173,8 @@
             </div>
         </div>
     </div>
+
+    <script src="{% static 'js/script.js' %}"></script>
 
 </body>
 

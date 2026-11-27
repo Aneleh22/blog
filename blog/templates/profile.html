@@ -1,9 +1,8 @@
-{# blog\templates\profile.html #}
 {% extends '_base.html' %}
 {% load static %}
 
 {% block content %}
-{% static 'img/anonimous.jpg' as default_image %}
+{% static 'img/anonimous.png' as default_image %}
 <section>
     <h2 class="pb-3">{{ user.name | default:user.username }}</h2>
     <div class="profile-auto-width bg-body-secondary ps-sm-3 pt-md-3 rounded">
@@ -28,7 +27,7 @@
 <hr>
 <div class="text-center">
     <form method="post" action="{% url 'logout' %}">
-        {% csrf_token %}
+        {% csrf_token %}   {# para proteger o formulário contra requisições forjadas #}
         <button type="submit" class="btn btn-warning">
             <i class="bi bi-box-arrow-right"></i> Sair / Logout
         </button>
