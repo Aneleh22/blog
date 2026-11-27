@@ -118,6 +118,10 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
+# Localização dos arquivos enviados pelos usuários (uploads)
+# imagens enviadas serão salvas na pasta media/, na raiz do projeto
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
 
 # Email
 # https://docs.djangoproject.com/en/6.1/topics/email/#topic-email-configuration

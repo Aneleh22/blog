@@ -26,18 +26,21 @@ body>footer { margin-top: .7rem; }
 @media screen and (min-width: 768px) {
     /* md */
     .main-aside { min-width: 250px; max-width: 250px; border-radius: 0 .4rem .4rem 0; }
-    .main-article-section { border-radius: .4rem 0 0 .4rem; }
+    /* .main-article-section { border-radius: .4rem 0 0 .4rem; } */
     .login-out { border: none; }
     .profile-auto-width { width: 100%; }
 }
 @media screen and (min-width: 992px) {
     /* lg */
     .profile-auto-width { width: 75%; }
+    .container-form { width: 75%; }
 }
 @media screen and (min-width: 1200px) {
     /* xg */
     .profile-auto-width { width: 50%; }
+    .container-form { width: 65%; }
 }
 @media screen and (min-width: 1400px) {
     /* xxg */
+    .container-form { width: 50%; }
 }

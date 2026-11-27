@@ -1,7 +1,5 @@
-{# blog\templates\_base.html #}
 <!DOCTYPE html>
 {% load static %}
-{% static 'img/anonimous.png' as default_image %}
 <html lang="pt-BR">
 
 <head>
@@ -14,14 +12,12 @@
     <title>Blog</title>
 </head>
 
-<body data-show-login="{% if request.GET.next %}true{% else %}false{% endif %}"
-    class="px-2 min-vh-100 d-flex flex-column">
+<body data-show-login="{% if request.GET.next %}true{% else %}false{% endif %}" class="px-2 min-vh-100 d-flex flex-column">
 
     <nav class="container navbar navbar-expand-md navbar-dark text-bg-dark fixed-top mx-auto rounded-bottom">
         <div class="container-fluid">
             <a class="navbar-brand" href="{% url 'home' %}"><i class="bi bi-bootstrap-fill text-warning"></i></a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar"><span
-                    class="navbar-toggler-icon"></span></button>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar"><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="mynavbar">
                 <ul class="navbar-nav me-auto">
                     <li class="nav-item"><a class="nav-link" href="{% url 'home' %}">Início</a></li>
@@ -32,9 +28,7 @@
                             <li><a class="dropdown-item" href="#about_site">Sobre o site</a></li>
                             <li><a class="dropdown-item" href="#about_author">Sobre o autor</a></li>
                             <li><a class="dropdown-item" href="#policies">Políticas de privacidade</a></li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
+                            <li><hr class="dropdown-divider"></li>
                             <li><a class="dropdown-item" href="{% url 'contacts' %}">Faça contato</a></li>
                         </ul>
                     </li>
@@ -44,16 +38,14 @@
                     {% if request.user.is_authenticated %}
 
                     <a href="{% url 'profile' %}" class="d-flex align-items-center">
-                        <img src="{{ user.image|default:default_image }}" alt="{{ user.name|default:user.username }}"
-                            class="rounded-circle d-block me-2" referrerpolicy="no-referrer">
+                        <img src="{{ user.image_url }}" alt="{{ user.name|default:user.username }}" class="rounded-circle d-block me-2" referrerpolicy="no-referrer">
                         <span>Perfil</span>
                     </a>
 
                     {% else %}
 
                     <a href="#" class="d-flex align-items-center" data-bs-toggle="modal" data-bs-target="#loginModal">
-                        <img src="{% static 'img/anonimous.png' %}" alt="Faça login"
-                            class="rounded-circle d-block me-2">
+                        <img src="{% static 'img/anonimous.png' %}" alt="Faça login" class="rounded-circle d-block me-2">
                         <span>Login</span>
                     </a>
 
@@ -71,17 +63,15 @@
     </nav>
     <header class="container rounded text-dark mx-auto p-0">
         <div class="p-3">
-            <h1 class="d-flex align-items-center gap-3 justify-content-center"><i
-                    class="bi bi-bootstrap"></i><span>Blog</span></h1>
+            <h1 class="d-flex align-items-center gap-3 justify-content-center"><i class="bi bi-bootstrap"></i><span>Blog</span></h1>
         </div>
     </header>
 
-    <main class="container d-flex flex-column flex-md-row p-0 flex-grow-1">
+    <main class="container d-flex flex-column flex-md-row p-0 flex-grow-1 gap-3">
         <div class="main-article-section bg-light p-3 flex-fill flex-grow-1">
             {% if messages %}
             {% for message in messages %}
-            <div class="alert {% if message.tags == 'error' %}alert-danger{% else %}alert-{{ message.tags }}{% endif %} alert-dismissible fade show"
-                role="alert">
+            <div class="alert {% if message.tags == 'error' %}alert-danger{% else %}alert-{{ message.tags }}{% endif %} alert-dismissible fade show" role="alert">
                 {{ message }}
                 <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
             </div>
@@ -102,14 +92,10 @@
             <div class="p-2 mt-2">
                 <h5>Redes Sociais</h5>
                 <nav class="d-flex flex-column lh-lg">
-                    <a href="https://facebook.com/" target="_blank"><i class="bi bi-facebook"></i>
-                        <span>Facebook</span></a>
-                    <a href="https://instagram.com/" target="_blank"><i class="bi bi-instagram"></i>
-                        <span>Instagram</span></a>
-                    <a href="https://youtube.com/" target="_blank"><i class="bi bi-youtube"></i>
-                        <span>Youtube</span></a>
-                    <a href="https://github.com/" target="_blank"><i class="bi bi-github"></i>
-                        <span>GitHub.com</span></a>
+                    <a href="https://facebook.com/" target="_blank"><i class="bi bi-facebook"></i> <span>Facebook</span></a>
+                    <a href="https://instagram.com/" target="_blank"><i class="bi bi-instagram"></i> <span>Instagram</span></a>
+                    <a href="https://youtube.com/" target="_blank"><i class="bi bi-youtube"></i> <span>Youtube</span></a>
+                    <a href="https://github.com/" target="_blank"><i class="bi bi-github"></i> <span>GitHub.com</span></a>
                 </nav>
             </div>
             <div class="p-2 d-none d-sm-block mt-2">
@@ -158,12 +144,10 @@
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Senha</label>
-                            <input type="password" name="password" class="form-control" placeholder="Sua senha"
-                                required>
+                            <input type="password" name="password" class="form-control" placeholder="Sua senha" required>
                         </div>
                         <div>
-                            <button type="submit" class="btn btn-primary"><i class="bi bi-box-arrow-in-right"></i>
-                                Entrar</button>
+                            <button type="submit" class="btn btn-primary"><i class="bi bi-box-arrow-in-right"></i> Entrar</button>
                         </div>
                     </form>
                 </div>
@@ -173,7 +157,7 @@
             </div>
         </div>
     </div>
-
+    
     <script src="{% static 'js/script.js' %}"></script>
 
 </body>
